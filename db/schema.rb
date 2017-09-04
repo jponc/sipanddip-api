@@ -10,17 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904145127) do
+ActiveRecord::Schema.define(version: 20170904145744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "inventories", force: :cascade do |t|
-    t.string "slug"
-    t.string "name"
-    t.integer "restock_trigger_count"
+  create_table "daily_records", force: :cascade do |t|
+    t.date "record_date", null: false
+    t.decimal "gross_sales", precision: 7, scale: 2, default: "0.0"
+    t.decimal "expenses", precision: 7, scale: 2, default: "0.0"
+    t.decimal "deposit_amount", precision: 7, scale: 2, default: "0.0"
+    t.integer "food_cups_count", default: 0
+    t.integer "drink_cups_count", default: 0
+    t.string "prepared_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["record_date"], name: "index_daily_records_on_record_date"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "name"
+    t.integer "restock_trigger_count", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_inventories_on_slug"
   end
 
 end
