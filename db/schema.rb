@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904150541) do
+ActiveRecord::Schema.define(version: 20170905143615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(version: 20170904150541) do
     t.integer "total_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "inventory_id"
+    t.bigint "daily_record_id"
+    t.index ["daily_record_id"], name: "index_inventory_items_on_daily_record_id"
+    t.index ["inventory_id"], name: "index_inventory_items_on_inventory_id"
   end
 
+  add_foreign_key "inventory_items", "daily_records"
+  add_foreign_key "inventory_items", "inventories"
 end
