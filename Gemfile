@@ -25,3 +25,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'google-api-client'
 gem 'monetize'
+gem 'money-rails', '~>1'
+gem 'slack-notifier'

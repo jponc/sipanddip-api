@@ -10,7 +10,7 @@ module DailyRecordServices
         prepared_by: sheet_row[6]
       )
 
-      send_notification!
+      send_notifications
     end
 
     private
@@ -20,8 +20,17 @@ module DailyRecordServices
       "Sales!A2:G100"
     end
 
-    def send_notification!
+    def slack_text
+      "*#{@daily_record.record_date}* by #{@daily_record.prepared_by}"
+    end
 
+    def slack_attachment_text
+      [
+        "Gross: *#{@daily_record.format_gross_sales}*",
+        "Expenses: *#{@daily_record.format_expenses}*",
+        "Deposit Amount: *#{@daily_record.format_deposit_amount}*",
+        "Food Cups: *#{@daily_record.food_cups_count}*, Drink Cups: *#{@daily_record.drink_cups_count}*",
+      ].join("\n")
     end
   end
 end
