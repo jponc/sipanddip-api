@@ -33,8 +33,9 @@ inventory_hash = {
 
 inventory_hash.each do |inventory_slug, trigger_count|
   inventory_slug = inventory_slug.to_s
-  Inventory.create!(
-    slug: inventory_slug,
+
+  inventory = Inventory.find_or_initialize_by(slug: inventory_slug)
+  inventory.update_attributes!(
     name: inventory_slug.humanize,
     restock_trigger_count: trigger_count
   )
