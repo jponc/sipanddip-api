@@ -1,6 +1,8 @@
 module DailyRecordServices
   class SalesData < WorksheetBase
     def process!
+      return if sheet_row.blank?
+
       @daily_record.update_attributes!(
         gross_sales: Monetize.parse(sheet_row[1]).to_d,
         expenses: Monetize.parse(sheet_row[2]).to_d,
@@ -17,7 +19,7 @@ module DailyRecordServices
 
     def send_slack_notification
       webhook_url = Rails.application.secrets[:slack][:webhook_url]
-      notifier = Slack::Notifier.new webhook_url, channel: "#app", username: "appbot"
+      notifier = Slack::Notifier.new webhook_url
 
       attachment = {
         fallback: slack_attachment_text,

@@ -22,7 +22,7 @@ module DailyRecordServices
 
     def sheet_row
       sheet_values.find do |sheet_value|
-        sheet_value.first == @daily_record.record_date.strftime('%-m/%d/%Y')
+        sheet_value.first == @daily_record.record_date.strftime('%-m/%-d/%Y')
       end
     end
 
