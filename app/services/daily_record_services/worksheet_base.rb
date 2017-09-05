@@ -16,23 +16,6 @@ module DailyRecordServices
 
     private
 
-    def send_notifications
-      send_slack_notification
-    end
-
-    def send_slack_notification
-      webhook_url = Rails.application.secrets[:slack][:webhook_url]
-      notifier = Slack::Notifier.new webhook_url, channel: "#app", username: "appbot"
-
-      attachment = {
-        fallback: slack_attachment_text,
-        text: slack_attachment_text,
-        color: "good",
-        mrkdwn_in: ["text"]
-      }
-      notifier.post text: slack_text, attachments: [attachment]
-    end
-
     def spreadsheet_id
       Rails.application.secrets[:google][:sheet_id]
     end

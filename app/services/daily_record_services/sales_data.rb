@@ -10,10 +10,24 @@ module DailyRecordServices
         prepared_by: sheet_row[6]
       )
 
-      send_notifications
+      send_slack_notification
     end
 
     private
+
+    def send_slack_notification
+      webhook_url = Rails.application.secrets[:slack][:webhook_url]
+      notifier = Slack::Notifier.new webhook_url, channel: "#app", username: "appbot"
+
+      attachment = {
+        fallback: slack_attachment_text,
+        text: slack_attachment_text,
+        color: "good",
+        mrkdwn_in: ["text"]
+      }
+
+      notifier.post text: slack_text, attachments: [attachment]
+    end
 
     def range
       # TODO: Make this range dynamically change
@@ -21,7 +35,7 @@ module DailyRecordServices
     end
 
     def slack_text
-      "*#{@daily_record.record_date}* by #{@daily_record.prepared_by}"
+      "*#{@daily_record.record_date}* Sales Report by #{@daily_record.prepared_by}"
     end
 
     def slack_attachment_text
