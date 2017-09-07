@@ -14,8 +14,6 @@ module DailyRecordServices
       raise 'Implement me!'
     end
 
-    private
-
     def spreadsheet_id
       Rails.application.secrets[:google][:sheet_id]
     end
