@@ -47,7 +47,7 @@ module DailyRecordServices
         "Gross: *#{@daily_record.format_gross_sales}*",
         "Expenses: *#{@daily_record.format_expenses}*",
         "Deposit Amount: *#{@daily_record.format_deposit_amount}*",
-        "Food Cups: *#{@daily_record.food_cups_count}*, Drink Cups: *#{@daily_record.drink_cups_count}*",
+        "Combo: *#{@daily_record.food_cups_count}*, Drinks: *#{@daily_record.drink_cups_count}*, PWD: *#{@daily_record.pwd_count}*, Discount: *#{@daily_record.discount_count}*",
       ].join("\n")
     end
   end

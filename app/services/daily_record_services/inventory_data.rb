@@ -76,7 +76,7 @@ module DailyRecordServices
     def slack_restock_text
       @daily_record.inventory_items.restock_needed.includes(:inventory).to_a.map do |inventory_item|
         inventory = inventory_item.inventory
-        "*#{inventory.name}* - Remaining: *#{inventory_item.total_count}*"
+        "*#{inventory.name}* - remaining: *#{inventory_item.total_count}*, trigger: *#{inventory.restock_trigger_count}*"
       end.join("\n")
     end
 
