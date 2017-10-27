@@ -8,37 +8,34 @@ module DailyRecordServices
       FbServices::GroupPost.send(message)
     end
 
-    private
-
     def message
       <<~HEREDOC
         #{@daily_record.record_date} Sales Report by #{@daily_record.prepared_by}
-
+        \n
         === Sales ==
-
+        \n
         Gross: #{@daily_record.format_gross_sales}
         Expenses: #{@daily_record.format_expenses}
         Deposit Amount: #{@daily_record.format_deposit_amount}
         Discrepancy: #{@daily_record.format_discrepancy}
         Notes: #{@daily_record.notes}
-
+        \n
         == All Inventory ==
-
+        \n
         #{inventory_text}
-
+        \n
         == Restock Needed ==
-
+        \n
         #{restock_text}
       HEREDOC
     end
 
+    private
+
     def inventory_text
       @daily_record.inventory_items.includes(:inventory).to_a.map do |inventory_item|
         <<~HEREDOC
-        #{inventory_item.inventory.name}
-        - In: #{inventory_item.in_count}
-        - Out: #{inventory_item.out_count}
-        - On Hand: #{inventory_item.total_count}
+        #{inventory_item.inventory.name} - In: #{inventory_item.in_count}, Out: #{inventory_item.out_count}, On Hand: #{inventory_item.total_count}
 
         HEREDOC
       end.join("\n")
@@ -50,9 +47,7 @@ module DailyRecordServices
       if items_needed_restock.any?
         @daily_record.inventory_items.restock_needed.to_a.map do |inventory_item|
           <<~HEREDOC
-          #{inventory_item.inventory.name}
-          - On Hand: #{inventory_item.total_count}
-          - Trigger Count: #{inventory_item.inventory.restock_trigger_count}
+          #{inventory_item.inventory.name} - On Hand: #{inventory_item.total_count}, Trigger Count: #{inventory_item.inventory.restock_trigger_count}
 
           HEREDOC
         end.join("\n")
