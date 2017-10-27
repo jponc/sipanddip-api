@@ -9,6 +9,10 @@ class InventoryItem < ApplicationRecord
     joins(:inventory).where('inventory_items.total_count <= inventories.restock_trigger_count')
   }
 
+  scope :active, -> {
+    joins(:inventory).where(inventories: { active: true })
+  }
+
   def any_changes?
     (in_count != 0) || (out_count != 0)
   end
