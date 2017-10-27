@@ -11,7 +11,9 @@ module DailyRecordServices
         pwd_count: sheet_row[5],
         discount_count: sheet_row[6],
         deposit_amount: Monetize.parse(sheet_row[7]).to_d,
-        prepared_by: sheet_row[8]
+        prepared_by: sheet_row[8],
+        discrepancy: Monetize.parse(sheet_row[9]).to_d,
+        notes: sheet_row[12]
       )
 
       send_slack_notification
@@ -35,7 +37,7 @@ module DailyRecordServices
 
     def range
       # TODO: Make this range dynamically change
-      "Sales!A2:I100"
+      "Sales!A2:M100"
     end
 
     def slack_text
