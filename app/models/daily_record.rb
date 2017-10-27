@@ -5,7 +5,7 @@ class DailyRecord < ApplicationRecord
   validates :gross_sales, :expenses, :deposit_amount, :food_cups_count,
             :drink_cups_count, presence: true
 
-  %i(gross_sales expenses deposit_amount).each do |attr|
+  %i(gross_sales expenses deposit_amount discrepancy).each do |attr|
     define_method "format_#{attr}" do
       amount_in_cents = self.send(attr) * 100
       Money.new(amount_in_cents, 'PHP').format
