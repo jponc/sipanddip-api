@@ -36,7 +36,6 @@ module DailyRecordServices
       @daily_record.inventory_items.active.includes(:inventory).to_a.map do |inventory_item|
         <<~HEREDOC
         #{inventory_item.inventory.name} - In: #{inventory_item.in_count}, Out: #{inventory_item.out_count}, On Hand: #{inventory_item.total_count}
-
         HEREDOC
       end.join("\n")
     end
@@ -48,7 +47,6 @@ module DailyRecordServices
         @daily_record.inventory_items.active.restock_needed.to_a.map do |inventory_item|
           <<~HEREDOC
           #{inventory_item.inventory.name} - On Hand: #{inventory_item.total_count}, Trigger Count: #{inventory_item.inventory.restock_trigger_count}
-
           HEREDOC
         end.join("\n")
       else
