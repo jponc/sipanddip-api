@@ -11,14 +11,12 @@ module DailyRecordServices
     private
 
     def message
-      "
-      #{@daily_record.record_date} Sales Report by #{@daily_record.prepared_by}
-      \n
-      \n
-      Gross: #{@daily_record.format_gross_sales}\n
-      Expenses: #{@daily_record.format_expenses}\n
-      Deposit Amount: #{@daily_record.format_deposit_amount}\n
-      "
+      <<~HEREDOC
+        #{@daily_record.record_date} Sales Report by #{@daily_record.prepared_by}
+        Gross: #{@daily_record.format_gross_sales}
+        Expenses: #{@daily_record.format_expenses}
+        Deposit Amount: #{@daily_record.format_deposit_amount}
+      HEREDOC
     end
   end
 end
