@@ -41,7 +41,7 @@ module DailyRecordServices
         - On Hand: #{inventory_item.total_count}
 
         HEREDOC
-      end.joins("\n")
+      end.join("\n")
     end
 
     def restock_text
@@ -55,7 +55,7 @@ module DailyRecordServices
           - Trigger Count: #{inventory_item.inventory.restock_trigger_count}
 
           HEREDOC
-        end.joins("\n")
+        end.join("\n")
       else
         "Nothing needed restocking"
       end
