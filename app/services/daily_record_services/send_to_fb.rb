@@ -37,7 +37,7 @@ module DailyRecordServices
         <<~HEREDOC
         #{inventory_item.inventory.name} - In: #{inventory_item.in_count}, Out: #{inventory_item.out_count}, On Hand: #{inventory_item.total_count}
         HEREDOC
-      end.join("\n")
+      end
     end
 
     def restock_text
@@ -48,7 +48,7 @@ module DailyRecordServices
           <<~HEREDOC
           #{inventory_item.inventory.name} - On Hand: #{inventory_item.total_count}, Trigger Count: #{inventory_item.inventory.restock_trigger_count}
           HEREDOC
-        end.join("\n")
+        end
       else
         "Nothing needed restocking"
       end
