@@ -3,7 +3,7 @@ module DailyRecordServices
     def process!
       return if sheet_row.blank?
 
-      inventories = Inventory.active.to_a
+      inventories = Inventory.all.to_a
 
       inventory_slugs.each do |inventory_slug|
         inventory = inventories.find { |i| i.slug == inventory_slug }
