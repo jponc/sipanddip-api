@@ -27,5 +27,7 @@ gem 'google-api-client'
 gem 'monetize'
 gem 'money-rails', '~>1'
 gem 'slack-notifier'
+gem 'koala'
+gem 'oauth2'
 
 ruby "2.4.1"

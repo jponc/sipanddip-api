@@ -16,8 +16,7 @@ module DailyRecordServices
     end
 
     def process!
-      @daily_record.process_sales_data!
-      @daily_record.process_inventory_data!
+      @daily_record.process_reports!
     end
   end
 end

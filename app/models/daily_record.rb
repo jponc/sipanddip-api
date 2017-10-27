@@ -12,11 +12,21 @@ class DailyRecord < ApplicationRecord
     end
   end
 
+  def process_reports!
+    process_daily_sales_data!
+    process_inventory_data!
+    send_to_fb!
+  end
+
   def process_sales_data!
     DailyRecordServices::SalesData.new(self).process!
   end
 
   def process_inventory_data!
     DailyRecordServices::InventoryData.new(self).process!
+  end
+
+  def send_to_fb!
+    DailyRecordServices::SendToFb.new(self).process!
   end
 end
