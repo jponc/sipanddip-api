@@ -37,7 +37,7 @@ module DailyRecordServices
 
     def range
       # TODO: Make this range dynamically change
-      "Sales!A2:M100"
+      "Sales!A70:M200"
     end
 
     def slack_text

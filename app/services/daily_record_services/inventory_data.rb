@@ -82,7 +82,7 @@ module DailyRecordServices
 
     def range
       # TODO: Make this range dynamically change
-      "Inventory!A4:BU100"
+      "Inventory!A70:BU200"
     end
 
 
