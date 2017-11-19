@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027163312) do
+ActiveRecord::Schema.define(version: 20171119125946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20171027163312) do
     t.integer "discount_count", default: 0
     t.decimal "discrepancy", precision: 7, scale: 2, default: "0.0"
     t.text "notes"
+    t.integer "mojos_count", default: 0
     t.index ["record_date"], name: "index_daily_records_on_record_date"
   end
 

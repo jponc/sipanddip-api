@@ -10,10 +10,11 @@ module DailyRecordServices
         drink_cups_count: sheet_row[4],
         pwd_count: sheet_row[5],
         discount_count: sheet_row[6],
-        deposit_amount: Monetize.parse(sheet_row[7]).to_d,
-        prepared_by: sheet_row[8],
-        discrepancy: Monetize.parse(sheet_row[9]).to_d,
-        notes: sheet_row[12]
+        mojos_count: sheet_row[7],
+        deposit_amount: Monetize.parse(sheet_row[8]).to_d,
+        prepared_by: sheet_row[9],
+        discrepancy: Monetize.parse(sheet_row[10]).to_d,
+        notes: sheet_row[13]
       )
 
       send_slack_notification
