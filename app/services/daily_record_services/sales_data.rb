@@ -17,7 +17,7 @@ module DailyRecordServices
         notes: sheet_row[12]
       )
 
-      # send_slack_notification
+      send_slack_notification
     end
 
     private
