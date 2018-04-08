@@ -20,7 +20,7 @@ module DailyRecordServices
         )
       end
 
-      send_slack_notifications
+      # send_slack_notifications
     end
 
     private
