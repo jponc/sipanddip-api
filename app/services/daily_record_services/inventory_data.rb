@@ -82,7 +82,7 @@ module DailyRecordServices
 
     def range
       # TODO: Make this range dynamically change
-      "Inventory!A70:BU200"
+      "Inventory!A3:BU1000"
     end
 
 
@@ -106,15 +106,12 @@ module DailyRecordServices
         hot_chix
         chicken_strips
         fish_fillet
-        squid_rings
 
         french_fries
         onion_rings
-        potato_wedges
         mojos
 
         house_blend
-        red_tea
         cucumber
         lemonade
 
@@ -130,8 +127,6 @@ module DailyRecordServices
         honey_mustard
 
         oil
-        corn_starch
-        flour
       )
     end
   end
