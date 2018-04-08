@@ -109,6 +109,7 @@ module DailyRecordServices
 
         french_fries
         onion_rings
+        potato_wedges
         mojos
 
         house_blend
