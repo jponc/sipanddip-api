@@ -15,7 +15,7 @@ class DailyRecord < ApplicationRecord
   def process_reports!
     process_sales_data!
     process_inventory_data!
-    send_to_fb!
+    # send_to_fb!
   end
 
   def process_sales_data!
