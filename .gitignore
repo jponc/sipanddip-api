@@ -20,3 +20,4 @@
 !/tmp/.keep
 
 .byebug_history
+docker-compose.prod.yml

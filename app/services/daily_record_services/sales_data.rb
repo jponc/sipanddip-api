@@ -1,5 +1,9 @@
 module DailyRecordServices
   class SalesData < WorksheetBase
+
+    RANGE_START_ROW = 2
+    RANGE_START_DATE = Date.new(2019, 2, 5)
+
     def process!
       return if sheet_row.blank?
 
@@ -37,8 +41,10 @@ module DailyRecordServices
     end
 
     def range
-      # TODO: Make this range dynamically change
-      "Sales!A1:N1000"
+      date_diff = (RANGE_START_DATE - Date.today).to_i
+      row = RANGE_START_ROW + date_diff
+
+      "Sales!A#{row}:M#{row}"
     end
 
     def slack_text

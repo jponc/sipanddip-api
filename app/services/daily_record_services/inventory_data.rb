@@ -1,5 +1,9 @@
 module DailyRecordServices
   class InventoryData < WorksheetBase
+
+    RANGE_START_ROW = 5
+    RANGE_START_DATE = Date.new(2019, 2, 5)
+
     def process!
       return if sheet_row.blank?
 
@@ -81,10 +85,11 @@ module DailyRecordServices
     end
 
     def range
-      # TODO: Make this range dynamically change
-      "Inventory!A3:BU1000"
-    end
+      date_diff = (RANGE_START_DATE - Date.today).to_i
+      row = RANGE_START_ROW + date_diff
 
+      "Inventory!A#{row}:BF#{row}"
+    end
 
     def mapping_hash
       {}.tap do |h|
@@ -109,7 +114,6 @@ module DailyRecordServices
 
         french_fries
         onion_rings
-        potato_wedges
         mojos
 
         house_blend
@@ -117,6 +121,7 @@ module DailyRecordServices
         lemonade
 
         water
+
         big_cups
         separator
         plastic_gloves
