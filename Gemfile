@@ -29,5 +29,6 @@ gem 'money-rails', '~>1'
 gem 'slack-notifier'
 gem 'koala'
 gem 'oauth2'
+gem 'whenever', require: false
 
 ruby "2.4.1"

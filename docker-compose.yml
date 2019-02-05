@@ -1,0 +1,52 @@
+version: '3.5'
+
+services:
+  sipanddip-api:
+    container_name: sipanddip-api
+    image: sipanddip-api
+    build: .
+    volumes:
+      - sipanddip-api-bundle-cache-volume:/bundle
+      - sipanddip-api-volume:/opt/app
+    environment:
+      - RAILS_ENV=development
+      - GOOGLE_API_KEY=xx
+      - GOOGLE_SHEET_ID=xx
+      - SLACK_WEBHOOK_URL=xx
+      - DB_HOST=db
+    command: bundle exec rails s
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - sipanddip-api-network
+    depends_on:
+      - sipanddip-api-db
+
+  sipanddip-api-db:
+    image: postgres
+    container_name: sipanddip-api-db
+    restart: always
+    volumes:
+      - sipanddip-api-db-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+    networks:
+      - sipanddip-api-network
+
+networks:
+  sipanddip-api-network:
+    name: sipanddip-api-network
+
+volumes:
+  sipanddip-api-volume:
+    name: sipanddip-api-volume
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":${PWD}"
+  sipanddip-api-db-volume:
+  sipanddip-api-bundle-cache-volume:
