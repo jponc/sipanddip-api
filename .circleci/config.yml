@@ -58,5 +58,9 @@ jobs:
             docker build -f docker/app/Dockerfile -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PWD
             docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
+      - run:
+          name: Deploy app to Digital Ocean Server via Docker
+          command: |
+            ssh -o StrictHostKeyChecking=no root@$DO_HOST "/bin/bash ./deploy-sipanddip-api.sh"
       - store_test_results:
           path: test_results
