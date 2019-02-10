@@ -1,8 +1,8 @@
 module DailyRecordServices
   class InventoryData < WorksheetBase
 
-    RANGE_START_ROW = 5
-    RANGE_START_DATE = Date.new(2019, 2, 5)
+    RANGE_START_ROW = 4
+    RANGE_START_DATE = Date.new(2019, 2, 1)
 
     def process!
       return if sheet_row.blank?
@@ -85,10 +85,10 @@ module DailyRecordServices
     end
 
     def range
-      date_diff = (RANGE_START_DATE - Date.today).to_i
+      date_diff = (@daily_record.record_date - RANGE_START_DATE).to_i
       row = RANGE_START_ROW + date_diff
 
-      "Inventory!A#{row}:BF#{row}"
+      "Inventory!A#{row}:BF#{row + 1}"
     end
 
     def mapping_hash
