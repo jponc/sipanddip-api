@@ -16,6 +16,7 @@ module DailyRecordServices
     end
 
     def process!
+      puts "Processing report for #{@daily_record.record_date}"
       @daily_record.process_reports!
     end
   end

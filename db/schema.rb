@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119125946) do
+ActiveRecord::Schema.define(version: 20190210111158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,19 @@ ActiveRecord::Schema.define(version: 20171119125946) do
     t.decimal "gross_sales", precision: 7, scale: 2, default: "0.0"
     t.decimal "expenses", precision: 7, scale: 2, default: "0.0"
     t.decimal "deposit_amount", precision: 7, scale: 2, default: "0.0"
-    t.integer "food_cups_count", default: 0
-    t.integer "drink_cups_count", default: 0
     t.string "prepared_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pwd_count", default: 0
-    t.integer "discount_count", default: 0
     t.decimal "discrepancy", precision: 7, scale: 2, default: "0.0"
     t.text "notes"
-    t.integer "mojos_count", default: 0
+    t.integer "combo_cups_count", default: 0
+    t.integer "combo_cups_dc_count", default: 0
+    t.integer "sides_count", default: 0
+    t.integer "sides_dc_count", default: 0
+    t.integer "drinks_count", default: 0
+    t.integer "drinks_dc_count", default: 0
+    t.integer "dips_count", default: 0
+    t.integer "dips_dc_count", default: 0
     t.index ["record_date"], name: "index_daily_records_on_record_date"
   end
 

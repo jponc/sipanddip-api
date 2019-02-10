@@ -10,15 +10,18 @@ module DailyRecordServices
       @daily_record.update_attributes!(
         gross_sales: Monetize.parse(sheet_row[1]).to_d,
         expenses: Monetize.parse(sheet_row[2]).to_d,
-        food_cups_count: sheet_row[3].presence || 0,
-        drink_cups_count: sheet_row[4].presence || 0,
-        pwd_count: sheet_row[5].presence || 0,
-        discount_count: sheet_row[6].presence || 0,
-        mojos_count: sheet_row[7].presence || 0,
-        deposit_amount: Monetize.parse(sheet_row[8]).to_d,
-        prepared_by: sheet_row[9],
-        discrepancy: Monetize.parse(sheet_row[10]).to_d,
-        notes: sheet_row[12]
+        combo_cups_count: sheet_row[3].presence || 0,
+        combo_cups_dc_count: sheet_row[4].presence || 0,
+        sides_count: sheet_row[5].presence || 0,
+        sides_dc_count: sheet_row[6].presence || 0,
+        drinks_count: sheet_row[7].presence || 0,
+        drinks_dc_count: sheet_row[8].presence || 0,
+        dips_count: sheet_row[9].presence || 0,
+        dips_dc_count: sheet_row[10].presence || 0,
+        deposit_amount: Monetize.parse(sheet_row[11]).to_d,
+        prepared_by: sheet_row[12],
+        discrepancy: Monetize.parse(sheet_row[13]).to_d,
+        notes: sheet_row[14]
       )
 
       send_slack_notification
@@ -44,7 +47,7 @@ module DailyRecordServices
       date_diff = (@daily_record.record_date - RANGE_START_DATE).to_i
       row = RANGE_START_ROW + date_diff
 
-      "Sales!A#{row}:M#{row + 1}"
+      "Sales!A#{row}:O#{row + 1}"
     end
 
     def slack_text
@@ -52,12 +55,12 @@ module DailyRecordServices
     end
 
     def slack_attachment_text
-      [
-        "Gross: *#{@daily_record.format_gross_sales}*",
-        "Expenses: *#{@daily_record.format_expenses}*",
-        "Deposit Amount: *#{@daily_record.format_deposit_amount}*",
-        "Combo: *#{@daily_record.food_cups_count}*, Drinks: *#{@daily_record.drink_cups_count}*, PWD: *#{@daily_record.pwd_count}*, Discount: *#{@daily_record.discount_count}*",
-      ].join("\n")
+      <<~HEREDOC
+        Gross: *#{@daily_record.format_gross_sales}*
+        Expenses: *#{@daily_record.format_expenses}*
+        Deposit Amount: *#{@daily_record.format_deposit_amount}*
+        Discrepancy: *#{@daily_record.format_discrepancy}*
+      HEREDOC
     end
   end
 end

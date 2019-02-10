@@ -2,8 +2,16 @@ class DailyRecord < ApplicationRecord
   has_many :inventory_items, dependent: :destroy
 
   validates :record_date, uniqueness: true, presence: true
-  validates :gross_sales, :expenses, :deposit_amount, :food_cups_count,
-            :drink_cups_count, presence: true
+  validates :gross_sales,
+            :expenses,
+            :combo_cups_count,
+            :combo_cups_dc_count,
+            :sides_count,
+            :sides_dc_count,
+            :drinks_count,
+            :drinks_dc_count,
+            :deposit_amount,
+            :discrepancy, presence: true
 
   %i(gross_sales expenses deposit_amount discrepancy).each do |attr|
     define_method "format_#{attr}" do
