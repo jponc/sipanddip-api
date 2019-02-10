@@ -1,5 +1,5 @@
 class PingController < ApplicationController
   def index
-    render json: { status: 'Status OK' }
+    render json: { status: 'OK' }
   end
 end
