@@ -14,6 +14,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.8'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
