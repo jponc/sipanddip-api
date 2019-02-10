@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    parallelism: 3
+    parallelism: 1
     docker:
       - image: circleci/ruby:2.4.1
         environment:
@@ -53,12 +53,16 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Build and push Docker image
+          name: Build and push App Image
           command: |
             docker build -f docker/app/Dockerfile -t $DOCKER_LOGIN/$IMAGE_NAME:$TAG .
-            docker build -f docker/web/Dockerfile -t $DOCKER_LOGIN/$IMAGE_NAME-web:$TAG .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PWD
             docker push $DOCKER_LOGIN/$IMAGE_NAME:$TAG
+      - run:
+          name: Build and push Web Image
+          command: |
+            docker build -f docker/web/Dockerfile -t $DOCKER_LOGIN/$IMAGE_NAME-web:$TAG .
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PWD
             docker push $DOCKER_LOGIN/$IMAGE_NAME-web:$TAG
       - run:
           name: Deploy app to Digital Ocean Server via Docker
