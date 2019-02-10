@@ -1,0 +1,6 @@
+.env
+docker-compose.prod.yml
+/.bundle
+/tmp/*
+/log/*
+
