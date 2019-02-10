@@ -10,10 +10,11 @@ services:
       - sipanddip-api-volume:/opt/app
     environment:
       - RAILS_ENV=development
+      - SECRET_KEY_BASE=my-secret-development-key
       - GOOGLE_API_KEY=xx
       - GOOGLE_SHEET_ID=xx
       - SLACK_WEBHOOK_URL=xx
-      - DB_HOST=db
+      - DB_HOST=sipanddip-api-db
     command: bundle exec rails s
     stdin_open: true
     tty: true
