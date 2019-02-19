@@ -22,4 +22,3 @@ RUN bundle install --jobs 20 --retry 5 --without development test
 RUN bundle exec whenever --update-crontab
 
 EXPOSE 3000
-CMD cron && bundle exec puma -C config/puma.rb
