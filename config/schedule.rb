@@ -1,5 +1,8 @@
 set :output, "/opt/app/log/cron.log"
-ENV.each { |k, v| env(k, v) }
+set :environment, ENV["RAILS_ENV"]
+ENV.each_key do |key|
+  env key.to_sym, ENV[key]
+end
 
 # 11:30 PM PHT
 # every 1.day, at: '3:30pm' do
