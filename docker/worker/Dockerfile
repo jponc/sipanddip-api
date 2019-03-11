@@ -16,4 +16,3 @@ RUN touch ./log/cron.log
 
 RUN bundle install --binstubs --jobs 20 --retry 5 --without development test
 RUN bundle exec whenever --update-crontab
-CMD ["cron", "-f"]
