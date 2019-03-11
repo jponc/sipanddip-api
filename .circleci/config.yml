@@ -65,6 +65,12 @@ jobs:
             docker login -u $DOCKER_LOGIN -p $DOCKER_PWD
             docker push $DOCKER_LOGIN/$IMAGE_NAME-web:$TAG
       - run:
+          name: Build and push Worker Image
+          command: |
+            docker build -f docker/worker/Dockerfile -t $DOCKER_LOGIN/$IMAGE_NAME-worker:$TAG .
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PWD
+            docker push $DOCKER_LOGIN/$IMAGE_NAME-worker:$TAG
+      - run:
           name: Deploy app to Digital Ocean Server via Docker
           command: |
             ssh -o StrictHostKeyChecking=no root@$DO_HOST "/bin/bash ./deploy-sipanddip-api.sh"

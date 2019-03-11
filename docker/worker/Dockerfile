@@ -1,7 +1,7 @@
 FROM ruby:2.4.1
 
 RUN apt-get update &&\
-    apt-get install -y nodejs &&\
+    apt-get install -y nodejs cron &&\
     apt-get clean
 
 ENV RAILS_ENV='production'
@@ -12,6 +12,8 @@ WORKDIR $RAILS_ROOT
 
 COPY . .
 
-RUN bundle install ---jobs 20 --retry 5 -binstubs --without development test
+RUN touch ./log/cron.log
 
-EXPOSE 3000
+RUN bundle install ---jobs 20 --retry 5 -binstubs --without development test
+RUN bundle exec whenever --update-crontab
+CMD cron
