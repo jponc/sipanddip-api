@@ -12,6 +12,6 @@ WORKDIR $RAILS_ROOT
 
 COPY . .
 
-RUN bundle install ---jobs 20 --retry 5 -binstubs --without development test
+RUN bundle install --binstubs --jobs 20 --retry 5 --without development test
 
 EXPOSE 3000
